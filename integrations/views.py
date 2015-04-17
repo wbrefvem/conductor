@@ -1,5 +1,6 @@
 from django.views.generic import View
 from django.http import HttpResponse, HttpResponseNotAllowed
+from integrations.tasks import notify_at_task
 
 
 class AtTaskNotificationView(View):
@@ -11,4 +12,5 @@ class AtTaskNotificationView(View):
 
     def get(self, request, *args, **kwargs):
 
+        notify_at_task.delay()
         return HttpResponseNotAllowed(['POST'], "This url is an event handler and doesn't accept GET requests.")
