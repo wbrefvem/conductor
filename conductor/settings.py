@@ -16,7 +16,7 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-BROKER_URL = 'amqp://conductor:Welcome1@localhost:5672//'
+BROKER_URL = 'amqp://guest:guest@localhost:5672//'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
