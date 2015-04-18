@@ -15,4 +15,4 @@ class AtTaskNotificationView(View):
     def get(self, request, *args, **kwargs):
 
         notify_at_task.delay()
-        return HttpResponseNotAllowed(['POST'], "This url is an event handler and doesn't accept GET requests.")
+        return HttpResponseNotAllowed(['POST'], "405. There's nothing to GET here. Too bad!")
