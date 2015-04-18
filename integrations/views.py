@@ -8,7 +8,7 @@ class AtTaskNotificationView(View):
     template_name = 'template.html'
 
     def post(self, request, *args, **kwargs):
-        print request.POST
+        print request.body
 
         return HttpResponse('AtTask notification initiated...')
 
