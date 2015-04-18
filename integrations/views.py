@@ -26,11 +26,13 @@ class AtTaskNotificationView(View):
     def post(self, request, *args, **kwargs):
         data = json.loads(request.body)
 
-        note_string = '[GitHub] %s' % data['comment']['body']
+        # note_string = '[GitHub] %s' % data['comment']['body']
 
-        session_id = self.login('will.refvem@raleighnc.gov', 'Welcome2')
+        # session_id = self.login('will.refvem@raleighnc.gov', 'Welcome2')
 
-        resp = requests.post('https://raleighnc-it.attask-ondemand.com/attask/api/')
+        # resp = requests.post('https://raleighnc-it.attask-ondemand.com/attask/api/')
+
+        pp.pprint(data)
 
         return HttpResponse('AtTask notification initiated...')
 
