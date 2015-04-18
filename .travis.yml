@@ -4,4 +4,4 @@ before_install:
 - openssl aes-256-cbc -K $encrypted_ac39cb3218b1_key -iv $encrypted_ac39cb3218b1_iv -in docker-exp.pem.enc -out docker-exp.pem -d
 install: pip install -r requirements.txt
 script:
-- cd conductor && python manage.py test
+- python manage.py test
