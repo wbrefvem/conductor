@@ -1,4 +1,4 @@
-from fabric.api import run, env
+from fabric.api import run, env, cd
 from fabric.contrib.files import exists
 
 
@@ -12,4 +12,5 @@ def clone_repo(url=''):
     if not exists(repo):
         run('git clone %s' % url)
     else:
-        run('git pull')
+        with cd('conductor'):
+            run('git pull')
