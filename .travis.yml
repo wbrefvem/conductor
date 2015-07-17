@@ -1,10 +1,12 @@
 language: python
 python: '2.7'
-before_install:
-    - openssl aes-256-cbc -K $encrypted_ac39cb3218b1_key -iv $encrypted_ac39cb3218b1_iv -in deploy/docker-exp.pem.enc -out deploy/docker-exp.pem -d
 install: pip install -r requirements.txt
 script:
-    - python manage.py test
-after_script:
-    - cd deploy
-    - fab -i docker-exp.pem -H willrefvem.com clone_repo:url=https://github.com/wbrefvem/conductor.git
+- python manage.py test
+deploy:
+  provider: heroku
+  api_key:
+    secure: nt2lLptF2U0yZlTHotN6WkxhLByiHJ01sjy6EOrJ0Rsbk3LhzrnwJqkg/oEuBKSpRsweh+HN5YVWdXz3dlsM6ArflMXDZXbOkWze624t3ARE3Qq9TRdxMES3mzjY42RkxgAhtG3V+ghsyvye+9a/1NGBkCYFz6kkE53yLdDUe1GWZUadHSAtlDs5YH7A816rOSoGpSiQdzWh0a3Frzqdzqgq3/YRNVL6qUjdZ5+gW5saPjtkvcurJiNyrn+Y3Ohn7qtx1XWTLzIoRtNaEEIcjSYk9VfiqFcVM9/P+ZuC/k6Q3+1ip7R9aJQ9kImsd+3Y8kl/aI+q/LfuE23x+mWkVywESZneRIbXzZSXOp0i9v9GUmUybwiap9PyTV+x6GoTICkMwX/mvxjsSc4Gh7rOeFxlHSJHKYbMiV14qU2Nx2zcOFVlERcq/0IZf9l5wgvuk4J+zzW26xETp/kdJaUcP8FkG6zP5feSx8CY0mnrC4DNkQneUlStyX2S82e8urmFa5PP+QVl712zOW9ioWiVljYprTRrmI7avTmw+YgXrwdze7ZreO3egG5szV0wnvrjIzBUZ0sbGJpaJKHhqDPFEP8ZkIgStPGovy9YNxFVC86T0+w6Qtc6w0YjAG2kPo796vbMShRcNmzEsqMhxL1prvZsc7P+BXqp1NbfGQn2Law=
+  app: conductor-api
+  on:
+    repo: wbrefvem/conductor
