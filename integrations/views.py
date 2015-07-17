@@ -28,7 +28,7 @@ class AtTaskNotificationView(View):
 
         # note_string = '[GitHub] %s' % data['comment']['body']
 
-        # session_id = self.login('will.refvem@raleighnc.gov', 'Welcome2')
+        # session_id = self.login('will.refvem@raleighnc.gov', '')
 
         # resp = requests.post('https://raleighnc-it.attask-ondemand.com/attask/api/')
 
