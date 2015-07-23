@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load filters %}
+
+{% block content %}
+<form action="", method="POST">
+{% csrf_token %}
+    {% for field in form %}
+    <div class="form-group {% if field.errors %}has-error{% endif %}">
+        <label for="id_{{field.name}}" class="control-label">{{field.label}}</label>
+        {{field|addclass:'form-control'}}
+        {% if field.errors %}{{field.errors}}{% endif %}
+    </div>
+    {% endfor %}
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}

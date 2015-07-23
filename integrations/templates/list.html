@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>Integrations <a href="{% url 'create' %}">+</a></h3>
+<table class="table table-hover">
+    <thead>
+        <th>Field 1</th>
+        <th>Field 2</th>
+    </thead>
+    {% for obj in object_list %}
+    <tr>
+        <td><a href="{% url 'update' obj.pk %}">{{obj.field1a}} {{obj.field1b}}</a></td>
+        <td>{{obj.field2}}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
