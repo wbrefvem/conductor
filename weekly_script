@@ -1,0 +1,41 @@
+#!/usr/bin/python
+
+
+from github3 import GitHub
+from datetime import datetime, timedelta
+import requests
+
+
+def login(username='', password=''):
+    resp = requests.get('https://raleighnc-it.attask-ondemand.com/attask/api/login?username=%s&password=%s' % (username, password))
+    data = resp.json()['data']
+    return data['sessionID']
+
+
+def logout(session_id=''):
+    resp = requests.get('https://raleighnc-it.attask-ondemand.com/attask/api/logout?sessionID=%s' % session_id)
+    success = resp.json()['data']['success']
+
+    if not success:
+        raise NetworkError('Logout failed!')
+
+since = datetime.today() - timedelta(days=7)
+
+gh = GitHub('wbrefvem', '8$m32_xKe')
+repos = gh.iter_repos(sort='pushed')
+
+session_id = login('will.refvem@raleighnc.gov', 'Welcome2')
+headers = {'SessionID': session_id}
+
+
+for repo in repos:
+    if repo.name != 'conference-room' and repo.name != 'conference-room-api':
+        continue
+
+    for commit in repo.iter_commits(since=since, author='wbrefvem'):
+        commit_message = 'COMMIT [%s/%s:%s] %s' % (repo.owner, repo.name, commit.commit.sha[:6], commit.commit.message)
+        print commit_message
+        resp = requests.post('https://raleighnc-it.attask-ondemand.com/attask/api/v4.0/note?objID=5548f89a0045df485c6165611462b9d7&noteObjCode=TASK&noteText=%s' % commit_message, headers=headers)
+        print resp.json()
+
+logout(session_id)

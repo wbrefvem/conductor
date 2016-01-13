@@ -2,20 +2,16 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-class Service(models.Model):
-    name = models.CharField(max_length=256)
+class GitHubAccount(models.Model):
+    user = models.ForeignKey(User)
+    github_id = models.IntegerField()
 
 
-class Integration(models.Model):
-    services = models.ManyToManyField(Service)
+class AtTaskAccount(models.Model):
+    user = models.ForeignKey(User)
+    attask_id = models.IntegerField()
 
 
 class Worker(models.Model):
-    user = models.ForeignKey(User)
-
-
-class Account(models.Model):
-    service = models.ForeignKey(Service)
-    worker = models.OneToOneField(Worker)
-    username = models.CharField(max_length=256)
-    password = models.CharField(max_length=128)
+    github_account = models.ForeignKey(GitHubAccount)
+    attask_account = models.ForeignKey(AtTaskAccount)
